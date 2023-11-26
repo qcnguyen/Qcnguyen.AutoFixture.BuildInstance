@@ -11,6 +11,8 @@ Example:
         {
             const int MyCustomId = 1989;
             var fixture = new Fixture();
+
+            //build object with imperative command
             var obj = fixture.BuildInstance<Model>()
                 .With(x => x.Id, MyCustomId)
                     .BuildScalarProperty(x => x.ScalarProp)
@@ -21,6 +23,7 @@ Example:
                     .AddManyThenDone()
                 .Create();
 
+            //assert the generated object
             var expectedJson = @"
                     {
                       ""Id"": 1989,
@@ -73,9 +76,11 @@ Example:
 
             var fixture = new Fixture();
 
+            //build object using default in GenLaw
             var obj = fixture.BuildInstance<Model>(genLaw)
                 .Create();
 
+            //assert the generated object
             var expectedJson = @"
                     {
                       ""Id"": 1989,
