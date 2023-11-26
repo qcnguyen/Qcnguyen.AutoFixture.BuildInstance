@@ -1,10 +1,29 @@
 # Qcnguyen.AutoFixture.BuildInstance
 Extensions to autofixture, add capability to:
-  - fluent build instance
+  - fluent build instance - support complex object (navigation property)
   - GenLaw to define default behivor when generate object instance
 
 Example: 
-1. build imperative 
+- supposed we have the following classes :
+```cs
+public class Model
+{
+    public int Id { get; set; }
+    public ScalarProp ScalarProp { get; set; }
+    public IEnumerable<CollectionProp> CollectionProp { get; set; }
+}
+public class ScalarProp
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+public class CollectionProp
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
+1. example build imperative way
 ```cs
         [TestMethod]
         public void TestBuildInstance_ShouldWork_WithBuildImperative()
@@ -54,7 +73,7 @@ Example:
 
         }
 ```
-2. build using GenLaw
+2. example build using GenLaw
 ```cs
         [TestMethod]
         public void TestBuildInstance_ShouldWork_WithGenlaw()
