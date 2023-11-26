@@ -4,10 +4,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Product>qcnguyen.autofixture</Product>
-    <Description>qcnguyen.autofixture</Description>
-    <PackageId>qcnguyen.autofixture</PackageId>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Product>Qcnguyen.AutoFixture.BuildInstance</Product>
+    <Description>Qcnguyen.AutoFixture.BuildInstance</Description>
+    <PackageId>Qcnguyen.AutoFixture.BuildInstance</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Version>1.0.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
