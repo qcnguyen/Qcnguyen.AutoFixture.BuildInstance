@@ -10,7 +10,6 @@ namespace Qcnguyen.AutoFixture.BuildInstance.GenLaw
     public class GenRuleSet<T>
     {
         IList<BaseGenRule<T>> _rules = new List<BaseGenRule<T>>();
-        IList<Action<GenLaw, Fixture>> _deferredRuleCreation = new List<Action<GenLaw, Fixture>>();
 
         public GenRuleSet<T> EnsureStringMaxLen(Expression<Func<T, string>> propertyPicker, int maxLength)
         {
@@ -42,17 +41,8 @@ namespace Qcnguyen.AutoFixture.BuildInstance.GenLaw
             return this;
         }
 
-        internal IPostprocessComposer<T> ApplyConstraint(IPostprocessComposer<T> composer, GenLaw genRuleSetDictionary, Fixture fixture)
+        internal IPostprocessComposer<T> ApplyConstraint(IPostprocessComposer<T> composer)
         {
-            if (_deferredRuleCreation != null)
-            {
-                foreach (var act in _deferredRuleCreation)
-                {
-                    act(genRuleSetDictionary, fixture);
-                }
-                _deferredRuleCreation = null;
-            }
-
             foreach (var rule in _rules.Where(x => x.RuleType == GenRuleType.Constraint))
             {
                 composer = rule.ApplyRule(composer);
@@ -60,17 +50,8 @@ namespace Qcnguyen.AutoFixture.BuildInstance.GenLaw
             return composer;
         }
 
-        internal IPostprocessComposer<T> ApplyDefault(IPostprocessComposer<T> composer, GenLaw genRuleSetDictionary, Fixture fixture)
+        internal IPostprocessComposer<T> ApplyDefault(IPostprocessComposer<T> composer)
         {
-            if (_deferredRuleCreation != null)
-            {
-                foreach (var act in _deferredRuleCreation)
-                {
-                    act(genRuleSetDictionary, fixture);
-                }
-                _deferredRuleCreation = null;
-            }
-
             foreach (var rule in _rules.Where(x => x.RuleType == GenRuleType.Default))
             {
                 composer = rule.ApplyRule(composer);

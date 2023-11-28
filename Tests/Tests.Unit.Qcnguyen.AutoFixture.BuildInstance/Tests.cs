@@ -149,6 +149,25 @@ namespace Tests.Unit.Qcnguyen.AutoFixture.BuildInstance
         }
 
 
+        [TestMethod]
+        public void TestBuildInstance_ShouldWork_WithGenlawMaxString()
+        {
+            var genLaw = new GenLaw();
+            genLaw.SetRuleSet(
+                new GenRuleSet<ScalarProp>()
+                .EnsureStringMaxLen(x => x.Name, 2)
+            );
+
+            var fixture = new Fixture();
+
+            var obj = fixture.BuildInstance<Model>(genLaw)
+                .Create();
+
+            obj.ScalarProp.Name.Length.Should().BeLessThanOrEqualTo(2);
+
+        }
+
+
         public class Model
         {
             public int Id { get; set; }

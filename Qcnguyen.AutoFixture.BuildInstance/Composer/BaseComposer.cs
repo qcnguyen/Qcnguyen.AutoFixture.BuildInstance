@@ -34,7 +34,7 @@ namespace AutoFixture
             if (_law != null)
             {
                 var rules = _law.GetRuleSet<T>();
-                composer = rules.ApplyConstraint(composer, _law, _fixture);
+                composer = rules.ApplyConstraint(composer);
             }
             return composer;
         }
@@ -44,7 +44,7 @@ namespace AutoFixture
             if (_law != null)
             {
                 var rules = _law.GetRuleSet<T>();
-                composer = rules.ApplyDefault(composer, _law, _fixture);
+                composer = rules.ApplyDefault(composer);
             }
             return composer;
         }
